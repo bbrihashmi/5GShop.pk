@@ -52,7 +52,7 @@ async function ensureDb(db) {
   }
 
   const defaults = [
-    ['store_name', '5GShop.pk'],
+    ['store_name', '5Gshop.pk'],
     ['whatsapp', '923001234567'],
     ['currency', 'PKR']
   ];
@@ -90,13 +90,11 @@ async function readBody(req) {
 
 async function handleApi(req, env, url) {
   const db = env.DB;
-  if (!db) return json({ error: 'Database not bound. Create D1 and bind as DB.' }, 500);
+  if (!db) return json({ error: 'D1 database not bound. Bind D1 as DB in Cloudflare.' }, 500);
   await ensureDb(db);
   const method = req.method;
 
-  if (url.pathname === '/api/health') {
-    return json({ ok: true });
-  }
+  if (url.pathname === '/api/health') return json({ ok: true, database: 'D1', store: '5Gshop.pk' });
 
   if (url.pathname === '/api/store' && method === 'GET') {
     const products = await db.prepare('SELECT * FROM products WHERE active = 1 ORDER BY id DESC').all();
@@ -106,7 +104,7 @@ async function handleApi(req, env, url) {
     (settingsRows.results || []).forEach(function (row) { settings[row.key] = row.value; });
     return json({
       products: products.results || [],
-      categories: settingsRows && (cats.results || []).map(function (c) { return c.name; }),
+      categories: (cats.results || []).map(function (c) { return c.name; }),
       settings: settings
     });
   }
@@ -230,7 +228,6 @@ export default {
         return await handleApi(req, env, url);
       }
 
-      // Admin page (file path, not folder — avoids redirect bugs)
       if (url.pathname === '/admin' || url.pathname === '/admin/' || url.pathname === '/admin.html') {
         const asset = await env.ASSETS.fetch(new Request(new URL('/admin.html', url.origin)));
         return new Response(await asset.text(), {
