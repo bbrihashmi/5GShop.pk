@@ -1,12 +1,10 @@
 name = "5gshop-pk"
 main = "src/worker.js"
-compatibility_date = "2026-09-06"
+compatibility_date = "2024-11-01"
 
 [assets]
 directory = "./public"
 binding = "ASSETS"
 
-[[d1_databases]]
-binding = "DB"
-database_name = "5gshop-db"
-database_id = "REPLACE_WITH_YOUR_D1_ID"
+# Bind D1 in Cloudflare Dashboard as binding name: DB
+# Do not put a fake database_id here (it breaks deploy)
