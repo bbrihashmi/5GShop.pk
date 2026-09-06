@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>5GShop.pk — Mobile Accessories & Gadgets</title>
+<title>5Gshop.pk — Mobile Accessories & Gadgets</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f6f7f9;color:#111;line-height:1.45}
@@ -47,7 +47,7 @@ nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e8
 <body>
 <div class="top">FREE DELIVERY on orders above Rs. 2,500 • Cash on Delivery across Pakistan</div>
 <nav>
-  <div class="logo">5G<span>Shop.pk</span></div>
+  <div class="logo">5G<span>shop.pk</span></div>
   <div class="search"><input id="q" placeholder="Search products…" oninput="render()"></div>
   <button class="nav-btn light" onclick="openCart()">Cart (<span id="count">0</span>)</button>
 </nav>
@@ -69,9 +69,9 @@ nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e8
 </section>
 
 <footer class="footer">
-  <b>5GShop.pk</b><br>
+  <b>5Gshop.pk</b><br>
   Mobile accessories & gadgets for everyday use.<br>
-  COD available nationwide.
+  COD available nationwide. All store data is saved on Cloudflare D1.
 </footer>
 
 <div class="drawer" id="drawer" onclick="if(event.target===this)closeCart()">
@@ -96,8 +96,8 @@ nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e8
 <script>
 let products = [];
 let categories = [];
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-let settings = { whatsapp: '923001234567', store_name: '5GShop.pk' };
+let cart = JSON.parse(localStorage.getItem('cart_5gshop') || '[]');
+let settings = { whatsapp: '923001234567', store_name: '5Gshop.pk' };
 let activeCat = 'all';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -110,13 +110,8 @@ async function load() {
     categories = d.categories || [];
     settings = Object.assign(settings, d.settings || {});
   } catch (e) {
-    products = [
-      { id: 1, name: 'Fast USB-C Charger 25W', price: 1499, compare_price: 1999, category: 'Chargers', image: '', stock: 20 },
-      { id: 2, name: 'Braided Type-C Cable 1m', price: 499, compare_price: 799, category: 'Cables', image: '', stock: 50 },
-      { id: 3, name: 'Wireless Earbuds Pro', price: 3499, compare_price: 4999, category: 'Audio', image: '', stock: 15 },
-      { id: 4, name: 'Power Bank 20000mAh', price: 4299, compare_price: 5999, category: 'Power Banks', image: '', stock: 10 }
-    ];
-    categories = ['Chargers', 'Cables', 'Audio', 'Power Banks'];
+    products = [];
+    categories = [];
   }
   renderCats();
   render();
@@ -147,7 +142,7 @@ function render() {
         <div class="price">Rs. ${Number(p.price).toLocaleString()}${p.compare_price ? `<span class="old">Rs. ${Number(p.compare_price).toLocaleString()}</span>` : ''}</div>
         <button class="add" onclick="addToCart(${Number(p.id)})">Add to Cart</button>
       </div>
-    </article>`).join('') || '<p>No products found.</p>';
+    </article>`).join('') || '<p>No products yet. Add products from Admin.</p>';
 }
 
 function addToCart(id) {
@@ -161,7 +156,7 @@ function addToCart(id) {
 }
 
 function saveCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cart_5gshop', JSON.stringify(cart));
   updateCartUI();
 }
 
@@ -194,7 +189,7 @@ function closeCart() { drawer.classList.remove('open'); }
 function updateWa() {
   const t = cart.reduce((a, x) => a + x.price * x.qty, 0);
   const lines = cart.map(x => `• ${x.name} x${x.qty} = Rs.${x.price * x.qty}`).join('%0A');
-  const msg = `Order from 5GShop.pk%0A%0A${lines}%0A%0ATotal: Rs.${t}%0A%0AName: ${encodeURIComponent(name.value||'')}%0APhone: ${encodeURIComponent(phone.value||'')}%0ACity: ${encodeURIComponent(city.value||'')}%0AAddress: ${encodeURIComponent(address.value||'')}`;
+  const msg = `Order from 5Gshop.pk%0A%0A${lines}%0A%0ATotal: Rs.${t}%0A%0AName: ${encodeURIComponent(name.value||'')}%0APhone: ${encodeURIComponent(phone.value||'')}%0ACity: ${encodeURIComponent(city.value||'')}%0AAddress: ${encodeURIComponent(address.value||'')}`;
   const num = (settings.whatsapp || '923001234567').replace(/[^0-9]/g, '');
   waBtn.href = `https://wa.me/${num}?text=${msg}`;
 }
@@ -225,9 +220,8 @@ async function placeOrder() {
     cart = [];
     saveCart();
     closeCart();
-    alert('Order placed successfully! We will contact you soon.');
+    alert('Order placed successfully! Saved in D1 database. We will contact you soon.');
   } catch (e) {
-    // fallback: open WhatsApp
     updateWa();
     waBtn.click();
   }
