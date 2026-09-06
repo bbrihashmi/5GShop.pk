@@ -4,366 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>5Gshop.pk — Mobile Accessories & Gadgets</title>
-<meta name="description" content="Buy mobile accessories, chargers, earbuds, power banks and gadgets in Pakistan. Cash on Delivery available.">
+<meta name="description" content="Buy mobile accessories, chargers, earbuds and gadgets in Pakistan. Cash on Delivery available.">
 <style>
 :root{
-  --bg:#f3f5f9;
-  --card:#ffffff;
-  --text:#0f172a;
-  --muted:#64748b;
-  --line:#e2e8f0;
-  --brand:#0f172a;
-  --accent:#2563eb;
-  --accent2:#22c55e;
-  --danger:#ef4444;
-  --shadow:0 10px 30px rgba(15,23,42,.08);
-  --radius:18px;
+  --bg:#f6f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--line:#e2e8f0;
+  --brand:#0f172a;--accent:#2563eb;--green:#22c55e;--red:#ef4444;
+  --shadow:0 12px 30px rgba(15,23,42,.08);--radius:18px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.5;
-}
-a{color:inherit;text-decoration:none}
-button,input,textarea{font:inherit}
-.topbar{
-  background:linear-gradient(90deg,#0f172a,#1e293b);
-  color:#fff;
-  text-align:center;
-  padding:10px 14px;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.2px;
-}
-nav{
-  position:sticky;top:0;z-index:40;
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,.9);
-  border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:12px;
-  padding:12px 5%;
-}
-.logo{
-  font-size:22px;font-weight:900;letter-spacing:-.6px;white-space:nowrap;
-}
-.logo span{color:var(--accent)}
-.search{flex:1;max-width:460px;position:relative}
-.search input{
-  width:100%;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:999px;
-  padding:12px 14px 12px 40px;
-  outline:none;
-}
-.search:before{
-  content:"⌕";
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:var(--muted);font-size:16px;
-}
-.btn{
-  border:0;cursor:pointer;border-radius:999px;
-  padding:11px 16px;font-weight:800;font-size:13px;
-  transition:.15s ease;
-}
-.btn-dark{background:var(--brand);color:#fff}
-.btn-dark:hover{transform:translateY(-1px)}
-.btn-soft{background:#eef2ff;color:#1e3a8a}
-.btn-green{background:var(--accent2);color:#fff}
-.btn-full{width:100%}
-.hero{
-  margin:18px 5% 8px;
-  border-radius:28px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at top right, rgba(37,99,235,.35), transparent 40%),
-    linear-gradient(135deg,#0f172a 0%, #1e293b 55%, #0b1220 100%);
-  color:#fff;
-  padding:28px;
-  box-shadow:var(--shadow);
-  display:grid;
-  grid-template-columns:1.3fr .9fr;
-  gap:20px;
-  align-items:center;
-}
-.badge{
-  display:inline-block;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.6px;
-}
-.hero h1{
-  font-size:clamp(28px,5vw,46px);
-  line-height:1.08;
-  margin:12px 0 10px;
-  letter-spacing:-1px;
-}
-.hero p{color:#cbd5e1;max-width:520px}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.hero-card{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  padding:18px;
-}
-.hero-card h3{font-size:15px;margin-bottom:8px}
-.hero-card ul{list-style:none;color:#cbd5e1;font-size:13px}
-.hero-card li{margin:8px 0}
-.section{padding:18px 5% 8px}
-.section-head{
-  display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px;
-}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}
+.topbar{background:linear-gradient(90deg,#0f172a,#1e293b);color:#fff;overflow:hidden;height:36px;display:flex;align-items:center}
+.marquee{display:flex;gap:40px;white-space:nowrap;animation:marquee 22s linear infinite;font-size:12px;font-weight:700;padding-left:100%}
+.marquee span{opacity:.95}
+@keyframes marquee{to{transform:translateX(-100%)}}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:10px 4%}
+.menu-btn,.icon-btn{width:42px;height:42px;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.menu-btn:hover,.icon-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.burger{width:18px;height:12px;position:relative}
+.burger:before,.burger:after,.burger i{content:"";position:absolute;left:0;right:0;height:2px;background:var(--brand);border-radius:2px}
+.burger:before{top:0}.burger i{top:5px;display:block}.burger:after{bottom:0}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.6px}.logo span{color:var(--accent)}
+.search{flex:1;max-width:480px;position:relative}
+.search input{width:100%;border:1px solid var(--line);border-radius:999px;padding:11px 14px 11px 40px;outline:none;background:#fff;transition:.2s}
+.search input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.search:before{content:"⌕";position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.btn{border:0;cursor:pointer;border-radius:999px;padding:11px 16px;font-weight:800;font-size:13px;transition:.2s}
+.btn-dark{background:var(--brand);color:#fff}.btn-dark:hover{transform:translateY(-1px)}
+.btn-soft{background:#eef2ff;color:#1e3a8a}.btn-green{background:var(--green);color:#fff}.btn-full{width:100%}
+.badge-count{background:var(--accent);color:#fff;font-size:11px;border-radius:999px;padding:2px 7px;margin-left:4px}
+.side{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:70;opacity:0;pointer-events:none;transition:.25s}
+.side.open{opacity:1;pointer-events:auto}
+.side-panel{position:absolute;left:0;top:0;height:100%;width:min(320px,88%);background:#fff;padding:18px;transform:translateX(-105%);transition:.28s ease;overflow:auto}
+.side.open .side-panel{transform:translateX(0)}
+.side a,.side button.link{display:block;width:100%;text-align:left;padding:12px 10px;border-radius:12px;border:0;background:transparent;cursor:pointer;font-weight:700}
+.side a:hover,.side button.link:hover{background:#f1f5f9}
+.hero-wrap{margin:16px 4% 8px;position:relative}
+.slider{border-radius:24px;overflow:hidden;position:relative;box-shadow:var(--shadow);min-height:240px}
+.slide{display:none;padding:28px;color:#fff;min-height:240px;background:linear-gradient(135deg,#0f172a,#1e3a8a 60%,#0b1220);animation:fadeIn .45s ease}
+.slide.on{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}
+@keyframes fadeIn{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+.slide .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.slide h1{font-size:clamp(26px,4.5vw,42px);line-height:1.1;margin:12px 0;letter-spacing:-.8px}
+.slide p{color:#cbd5e1;max-width:480px}
+.slide-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.slide-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px}
+.arrows{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 10px;pointer-events:none}
+.arrows button{pointer-events:auto;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.9);cursor:pointer;font-weight:900;box-shadow:var(--shadow)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;background:#cbd5e1;cursor:pointer}
+.dots button.on{background:var(--brand);width:18px;border-radius:999px}
+.section{padding:18px 4%}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
 .section-head h2{font-size:22px;letter-spacing:-.4px}
 .section-head p{color:var(--muted);font-size:13px}
-.cats{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
-.cat{
-  white-space:nowrap;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--text);
-  border-radius:999px;
-  padding:10px 14px;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-}
-.cat.on{background:var(--brand);color:#fff;border-color:var(--brand)}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:16px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:0 1px 2px rgba(15,23,42,.03);
-  transition:.18s ease;
-  display:flex;flex-direction:column;
-}
-.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.pic{
-  aspect-ratio:1;
-  background:linear-gradient(180deg,#f8fafc,#eef2ff);
-  display:grid;place-items:center;
-  font-size:48px;
-  position:relative;
-}
-.pic img{width:100%;height:100%;object-fit:cover}
-.tag{
-  position:absolute;left:10px;top:10px;
-  background:#fee2e2;color:#991b1b;
-  font-size:11px;font-weight:800;
-  padding:5px 8px;border-radius:999px;
-}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.cat-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;cursor:pointer;transition:.2s;font-weight:800;font-size:13px}
+.cat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.cat-card.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.cat-emoji{font-size:28px;display:block;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.22s;display:flex;flex-direction:column;position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pic{aspect-ratio:1;background:linear-gradient(180deg,#f8fafc,#eef2ff);display:grid;place-items:center;font-size:48px;position:relative;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover;transition:.35s}
+.card:hover .pic img{transform:scale(1.05)}
+.tag-off{position:absolute;left:10px;top:10px;background:#fee2e2;color:#991b1b;font-size:11px;font-weight:800;padding:5px 8px;border-radius:999px;z-index:2}
+.wish{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:0;background:#fff;cursor:pointer;box-shadow:var(--shadow);z-index:2;font-size:16px}
 .info{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.meta{color:var(--muted);font-size:12px;font-weight:700}
 .info h3{font-size:14px;line-height:1.35;min-height:38px}
-.meta{color:var(--muted);font-size:12px;font-weight:600}
 .price-row{display:flex;align-items:baseline;gap:8px}
-.price{font-size:16px;font-weight:900}
-.old{color:#94a3b8;text-decoration:line-through;font-size:12px}
-.add{
-  margin-top:auto;
-  width:100%;
-  border:0;
-  background:var(--brand);
-  color:#fff;
-  padding:11px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:800;
-}
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px;
-  margin:8px 5% 10px;
-}
-.feature{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-}
-.feature b{display:block;margin-bottom:4px}
-.feature span{color:var(--muted);font-size:13px}
-.footer{
-  margin-top:28px;
-  background:#0f172a;
-  color:#94a3b8;
-  padding:34px 5%;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:18px;
-}
-.footer h4{color:#fff;margin-bottom:10px}
-.footer a,.footer p{font-size:13px;margin:6px 0}
+.price{font-size:16px;font-weight:900}.old{color:#94a3b8;text-decoration:line-through;font-size:12px}
+.add{margin-top:auto;width:100%;border:0;background:var(--brand);color:#fff;padding:11px;border-radius:12px;cursor:pointer;font-weight:800;transition:.2s}
+.add:hover{background:#1e293b}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:8px 4% 18px}
+.trust-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;transition:.2s}
+.trust-item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.trust-item b{display:block;margin-bottom:4px}.trust-item span{color:var(--muted);font-size:13px}
+.stats{margin:8px 4% 18px;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-radius:22px;padding:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center}
+.stats b{display:block;font-size:22px}.stats span{font-size:12px;color:#94a3b8}
+.footer{margin-top:24px;background:#0f172a;color:#94a3b8;padding:36px 4% 24px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:18px}
+.footer h4{color:#fff;margin-bottom:10px}.footer a,.footer p{display:block;font-size:13px;margin:7px 0}
 .footer .brand{color:#fff;font-size:22px;font-weight:900}
-.drawer{
-  position:fixed;inset:0;background:rgba(15,23,42,.45);
-  display:none;z-index:60;
-}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:60;background:#25D366;color:#fff;border-radius:999px;padding:12px 16px;font-weight:800;box-shadow:0 10px 25px rgba(37,211,102,.35);display:flex;gap:8px;align-items:center;transition:.2s}
+.wa-float:hover{transform:translateY(-2px)}
+.drawer{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;z-index:80}
 .drawer.open{display:block}
-.panel{
-  position:absolute;right:0;top:0;height:100%;
-  width:min(430px,100%);
-  background:#fff;
-  padding:18px;
-  overflow:auto;
-  box-shadow:-20px 0 50px rgba(0,0,0,.15);
-}
-.panel-head{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:12px;
-}
-.cart-item{
-  display:flex;justify-content:space-between;gap:12px;
-  padding:14px 0;border-bottom:1px solid var(--line);
-}
-.cart-item b{display:block;font-size:14px}
-.cart-item small{color:var(--muted)}
-.qty{display:flex;gap:6px;align-items:center}
-.qty button{
-  width:30px;height:30px;border-radius:10px;
-  border:1px solid var(--line);background:#f8fafc;cursor:pointer;font-weight:800;
-}
-.total-box{
-  margin-top:14px;
-  background:#f8fafc;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px;
-  display:flex;justify-content:space-between;align-items:center;
-  font-weight:900;font-size:18px;
-}
+.panel{position:absolute;right:0;top:0;height:100%;width:min(420px,100%);background:#fff;padding:18px;overflow:auto;transform:translateX(20px);animation:slideIn .25s ease forwards}
+@keyframes slideIn{to{transform:none}}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cart-item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.qty button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:#f8fafc;cursor:pointer;font-weight:800}
+.total-box{margin-top:14px;background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;justify-content:space-between;font-weight:900;font-size:18px}
 .form{margin-top:14px;display:grid;gap:8px}
-.form input,.form textarea{
-  width:100%;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px;
-  outline:none;
-  background:#fff;
-}
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:40px 10px;
-  background:#fff;
-  border:1px dashed var(--line);
-  border-radius:18px;
-}
-@media(max-width:860px){
-  .hero{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-}
+.form input,.form textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;outline:none}
+.empty{text-align:center;color:var(--muted);padding:36px 10px;border:1px dashed var(--line);border-radius:16px}
+@media(max-width:900px){.slide.on{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){
-  nav{padding:10px 12px}
-  .section,.hero,.features,.footer{margin-left:12px;margin-right:12px}
-  .section{padding-left:0;padding-right:0}
-  .hero{padding:20px;margin-top:12px}
-  .search{display:none}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .info h3{min-height:40px;font-size:13px}
+  .search{display:none}.section,.hero-wrap,.trust,.stats,.footer{margin-left:12px;margin-right:12px}
+  .section{padding-left:0;padding-right:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .footer-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-<div class="topbar">COD Nationwide • Free delivery on orders above Rs. 2,500 • Genuine accessories</div>
+<div class="topbar"><div class="marquee">
+  <span>COD Available Nationwide</span><span>Free Delivery on orders above Rs. 2,500</span>
+  <span>Genuine Mobile Accessories</span><span>Fast Support on WhatsApp</span>
+  <span>COD Available Nationwide</span><span>Free Delivery on orders above Rs. 2,500</span>
+  <span>Genuine Mobile Accessories</span><span>Fast Support on WhatsApp</span>
+</div></div>
 
 <nav>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><span class="burger"><i></i></span></button>
   <div class="logo">5G<span>shop.pk</span></div>
   <div class="search"><input id="q" placeholder="Search chargers, earbuds, cables…" oninput="render()"></div>
-  <button class="btn btn-soft" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Shop</button>
-  <button class="btn btn-dark" onclick="openCart()">Cart (<span id="count">0</span>)</button>
+  <button class="icon-btn" onclick="openWish()" title="Wishlist">♡ <span class="badge-count" id="wishCount">0</span></button>
+  <button class="btn btn-dark" onclick="openCart()">Cart <span class="badge-count" id="count">0</span></button>
 </nav>
 
-<section class="hero">
-  <div>
-    <div class="badge">MOBILE ACCESSORIES & GADGETS</div>
-    <h1>Upgrade your phone setup without overpaying.</h1>
-    <p>Fast chargers, premium cables, earbuds, power banks and more — delivered across Pakistan with Cash on Delivery.</p>
-    <div class="hero-actions">
-      <button class="btn btn-dark" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Browse Products</button>
-      <button class="btn btn-soft" onclick="openCart()">View Cart</button>
+<div class="side" id="side">
+  <div class="side-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <b>Menu</b><button class="btn btn-soft" onclick="closeSide()">Close</button>
+    </div>
+    <button class="link" onclick="goProducts();closeSide()">All Products</button>
+    <div id="sideCats"></div>
+    <a href="#trust">Why 5Gshop</a>
+    <a href="#footer">Contact</a>
+  </div>
+</div>
+
+<section class="hero-wrap">
+  <div class="slider" id="slider">
+    <div class="slide on">
+      <div>
+        <div class="tag">MOBILE ACCESSORIES & GADGETS</div>
+        <h1>Better gadgets. Better everyday phone life.</h1>
+        <p>Chargers, cables, earbuds and power banks — delivered across Pakistan with Cash on Delivery.</p>
+        <div class="slide-actions">
+          <button class="btn btn-dark" onclick="goProducts()">Shop Now</button>
+          <button class="btn btn-soft" onclick="openCart()">View Cart</button>
+        </div>
+      </div>
+      <div class="slide-card">
+        <b>Why customers choose us</b>
+        <p style="margin-top:8px;color:#cbd5e1;font-size:13px">✓ COD Nationwide<br>✓ WhatsApp ordering<br>✓ Quality accessories<br>✓ Easy support</p>
+      </div>
+    </div>
+    <div class="slide">
+      <div>
+        <div class="tag">FLASH DEALS</div>
+        <h1>Save more on daily mobile essentials.</h1>
+        <p>Discounted prices on chargers, earbuds and more. Limited stock items updated regularly.</p>
+        <div class="slide-actions"><button class="btn btn-dark" onclick="goProducts()">Browse Deals</button></div>
+      </div>
+      <div class="slide-card"><b>Free delivery</b><p style="margin-top:8px;color:#cbd5e1;font-size:13px">On orders above Rs. 2,500 across major cities.</p></div>
+    </div>
+    <div class="slide">
+      <div>
+        <div class="tag">TRUSTED SHOPPING</div>
+        <h1>Order on WhatsApp in one tap.</h1>
+        <p>Add products to cart and send your order details instantly on WhatsApp.</p>
+        <div class="slide-actions"><button class="btn btn-dark" onclick="document.getElementById('waFloat').click()">WhatsApp Order</button></div>
+      </div>
+      <div class="slide-card"><b>Secure checkout</b><p style="margin-top:8px;color:#cbd5e1;font-size:13px">Your order is saved safely and processed quickly.</p></div>
     </div>
   </div>
-  <div class="hero-card">
-    <h3>Why buy from 5Gshop.pk?</h3>
-    <ul>
-      <li>✓ Cash on Delivery available</li>
-      <li>✓ WhatsApp quick ordering</li>
-      <li>✓ Quality mobile accessories</li>
-      <li>✓ Easy returns support</li>
-    </ul>
+  <div class="arrows">
+    <button onclick="moveSlide(-1)">‹</button>
+    <button onclick="moveSlide(1)">›</button>
   </div>
-</section>
-
-<section class="features">
-  <div class="feature"><b>Cash on Delivery</b><span>Pay when you receive your order</span></div>
-  <div class="feature"><b>Fast Support</b><span>Order directly on WhatsApp too</span></div>
-  <div class="feature"><b>Pakistan Wide</b><span>Delivery across major cities</span></div>
-  <div class="feature"><b>Trusted Gadgets</b><span>Chargers, audio, power & more</span></div>
+  <div class="dots" id="dots"></div>
 </section>
 
 <section class="section">
-  <div class="section-head">
-    <div>
-      <h2>Categories</h2>
-      <p>Find what you need faster</p>
-    </div>
-  </div>
-  <div class="cats" id="cats"></div>
+  <div class="section-head"><div><h2>Shop by Category</h2><p>Find accessories faster</p></div></div>
+  <div class="cat-grid" id="catGrid"></div>
 </section>
 
 <section class="section" id="productsSection">
-  <div class="section-head">
-    <div>
-      <h2>Popular Products</h2>
-      <p>Best picks for everyday mobile use</p>
-    </div>
-  </div>
+  <div class="section-head"><div><h2>Popular Products</h2><p>Best picks for everyday use</p></div></div>
   <div class="grid" id="grid"></div>
 </section>
 
-<footer class="footer">
+<section class="trust" id="trust">
+  <div class="trust-item"><b>Cash on Delivery</b><span>Pay when your order arrives</span></div>
+  <div class="trust-item"><b>Fast Delivery</b><span>Nationwide courier support</span></div>
+  <div class="trust-item"><b>Easy Returns</b><span>Support if item is not right</span></div>
+  <div class="trust-item"><b>100% Authentic Focus</b><span>Quality mobile accessories</span></div>
+</section>
+
+<section class="stats">
+  <div><b id="statProducts">0+</b><span>Products</span></div>
+  <div><b>COD</b><span>Nationwide</span></div>
+  <div><b>4.8★</b><span>Target Rating</span></div>
+  <div><b>3–5</b><span>Day Delivery</span></div>
+</section>
+
+<footer class="footer" id="footer">
   <div class="footer-grid">
     <div>
       <div class="brand">5Gshop.pk</div>
-      <p>Your destination for mobile accessories and gadgets in Pakistan.</p>
-      <p>All store data is securely managed on Cloudflare D1.</p>
+      <p>Mobile accessories & gadgets for Pakistan.</p>
+      <p>Cash on Delivery available nationwide.</p>
     </div>
     <div>
       <h4>Shop</h4>
-      <p>Chargers</p>
-      <p>Cables</p>
-      <p>Audio</p>
-      <p>Power Banks</p>
+      <a href="#productsSection">All Products</a>
+      <a href="#productsSection">Chargers</a>
+      <a href="#productsSection">Audio</a>
+      <a href="#productsSection">Cables</a>
     </div>
     <div>
       <h4>Help</h4>
       <p>Cash on Delivery</p>
       <p>WhatsApp Order</p>
       <p>Delivery Support</p>
+      <p>Returns Policy</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p id="footWa">WhatsApp: set in admin</p>
+      <p>Email: support@5gshop.pk</p>
+      <p>Pakistan</p>
     </div>
   </div>
 </footer>
 
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+
 <div class="drawer" id="drawer" onclick="if(event.target===this)closeCart()">
   <aside class="panel">
-    <div class="panel-head">
-      <h2>Your Cart</h2>
-      <button class="btn btn-soft" onclick="closeCart()">Close</button>
-    </div>
+    <div class="panel-head"><h2>Your Cart</h2><button class="btn btn-soft" onclick="closeCart()">Close</button></div>
     <div id="cartList"></div>
     <div class="total-box"><span>Total</span><span>Rs. <span id="total">0</span></span></div>
     <div class="form">
@@ -371,166 +247,156 @@ nav{
       <input id="phone" placeholder="Phone (03XXXXXXXXX)">
       <input id="city" placeholder="City">
       <textarea id="address" rows="3" placeholder="Complete delivery address"></textarea>
+      <textarea id="note" rows="2" placeholder="Order note (optional)"></textarea>
       <button class="btn btn-dark btn-full" onclick="placeOrder()">Place COD Order</button>
       <a class="btn btn-green btn-full" id="waBtn" href="#" target="_blank" rel="noopener" style="text-align:center">Order on WhatsApp</a>
     </div>
   </aside>
 </div>
 
+<div class="drawer" id="wishDrawer" onclick="if(event.target===this)closeWish()">
+  <aside class="panel">
+    <div class="panel-head"><h2>Wishlist</h2><button class="btn btn-soft" onclick="closeWish()">Close</button></div>
+    <div id="wishList"></div>
+  </aside>
+</div>
+
 <script>
-let products = [];
-let categories = [];
-let cart = JSON.parse(localStorage.getItem('cart_5gshop') || '[]');
-let settings = { whatsapp: '923001234567', store_name: '5Gshop.pk' };
-let activeCat = 'all';
+let products=[], categories=[], activeCat='all', slideIndex=0;
+let cart=JSON.parse(localStorage.getItem('cart_5gshop')||'[]');
+let wish=JSON.parse(localStorage.getItem('wish_5gshop')||'[]');
+let settings={whatsapp:'923001234567',store_name:'5Gshop.pk'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const menuBtn=document.getElementById('menuBtn');
+const side=document.getElementById('side');
+menuBtn.onclick=()=>side.classList.add('open');
+side.onclick=e=>{if(e.target===side)closeSide()};
+function closeSide(){side.classList.remove('open')}
+function goProducts(){document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})}
 
-async function load() {
-  try {
-    const r = await fetch('/api/store');
-    const d = await r.json();
-    products = d.products || [];
-    categories = d.categories || [];
-    settings = Object.assign(settings, d.settings || {});
-  } catch (e) {
-    products = [];
-    categories = [];
-  }
-  renderCats();
-  render();
-  updateCartUI();
+function initDots(){
+  const slides=[...document.querySelectorAll('.slide')];
+  dots.innerHTML=slides.map((_,i)=>`<button class="${i===0?'on':''}" onclick="goSlide(${i})"></button>`).join('');
+}
+function goSlide(i){
+  const slides=[...document.querySelectorAll('.slide')];
+  slideIndex=(i+slides.length)%slides.length;
+  slides.forEach((s,idx)=>s.classList.toggle('on',idx===slideIndex));
+  [...dots.children].forEach((d,idx)=>d.classList.toggle('on',idx===slideIndex));
+}
+function moveSlide(n){goSlide(slideIndex+n)}
+setInterval(()=>moveSlide(1),6000);
+initDots();
+
+async function load(){
+  try{
+    const r=await fetch('/api/store'); const d=await r.json();
+    products=d.products||[]; categories=d.categories||[]; settings=Object.assign(settings,d.settings||{});
+  }catch(e){products=[];categories=[]}
+  statProducts.textContent=(products.length||0)+'+';
+  renderCats(); render(); updateCartUI(); updateWishUI(); updateWaLinks();
 }
 
-function renderCats() {
-  const list = ['all'].concat(categories.map(c => typeof c === 'string' ? c : c.name));
-  cats.innerHTML = list.map(c => `<button class="cat ${activeCat===c?'on':''}" onclick="filterCat('${esc(c)}')">${c==='all'?'All':esc(c)}</button>`).join('');
+function renderCats(){
+  const list=['all'].concat(categories.map(c=>typeof c==='string'?c:c.name));
+  const emoji={all:'🛍️',Chargers:'🔌',Cables:'🔗',Audio:'🎧','Power Banks':'🔋',Accessories:'📱'};
+  catGrid.innerHTML=list.map(c=>`<button class="cat-card ${activeCat===c?'on':''}" onclick="filterCat('${esc(c)}')"><span class="cat-emoji">${emoji[c]||'📦'}</span>${c==='all'?'All':esc(c)}</button>`).join('');
+  sideCats.innerHTML=list.map(c=>`<button class="link" onclick="filterCat('${esc(c)}');closeSide();goProducts()">${c==='all'?'All Products':esc(c)}</button>`).join('');
 }
-
-function filterCat(c) {
-  activeCat = c;
-  renderCats();
-  render();
+function filterCat(c){activeCat=c;renderCats();render()}
+function discountTag(p){
+  const price=Number(p.price||0), compare=Number(p.compare_price||0);
+  if(!compare||compare<=price) return '';
+  return `<div class="tag-off">-${Math.round(((compare-price)/compare)*100)}%</div>`;
 }
-
-function discountTag(p) {
-  const price = Number(p.price || 0);
-  const compare = Number(p.compare_price || 0);
-  if (!compare || compare <= price) return '';
-  const off = Math.round(((compare - price) / compare) * 100);
-  return `<div class="tag">-${off}%</div>`;
-}
-
-function render() {
-  const term = (q.value || '').toLowerCase();
-  let list = products.filter(p => p.active !== 0 && p.active !== false);
-  if (activeCat !== 'all') list = list.filter(p => (p.category || p.category_name || '') === activeCat);
-  if (term) list = list.filter(p => (p.name || '').toLowerCase().includes(term));
-  if (!list.length) {
-    grid.innerHTML = '<div class="empty">No products found. Add products from Admin.</div>';
-    return;
-  }
-  grid.innerHTML = list.map(p => `
+function isWished(id){return wish.some(x=>Number(x.id)===Number(id))}
+function render(){
+  const term=(q.value||'').toLowerCase();
+  let list=products.filter(p=>p.active!==0&&p.active!==false);
+  if(activeCat!=='all') list=list.filter(p=>(p.category||'')===activeCat);
+  if(term) list=list.filter(p=>(p.name||'').toLowerCase().includes(term));
+  if(!list.length){grid.innerHTML='<div class="empty">No products found.</div>';return}
+  grid.innerHTML=list.map(p=>`
     <article class="card">
       <div class="pic">
         ${discountTag(p)}
-        ${p.image ? `<img src="${esc(p.image)}" alt="">` : '📱'}
+        <button class="wish" onclick="toggleWish(${Number(p.id)})">${isWished(p.id)?'❤️':'♡'}</button>
+        ${p.image?`<img loading="lazy" src="${esc(p.image)}" alt="">`:'📱'}
       </div>
       <div class="info">
-        <div class="meta">${esc(p.category || 'Gadgets')}</div>
+        <div class="meta">${esc(p.category||'Gadgets')}</div>
         <h3>${esc(p.name)}</h3>
         <div class="price-row">
           <div class="price">Rs. ${Number(p.price).toLocaleString()}</div>
-          ${p.compare_price ? `<div class="old">Rs. ${Number(p.compare_price).toLocaleString()}</div>` : ''}
+          ${p.compare_price?`<div class="old">Rs. ${Number(p.compare_price).toLocaleString()}</div>`:''}
         </div>
-        <button class="add" onclick="addToCart(${Number(p.id)})">Add to Cart</button>
+        <button class="add" onclick="addToCart(${Number(p.id)})">Quick Add</button>
       </div>
     </article>`).join('');
 }
 
-function addToCart(id) {
-  const p = products.find(x => Number(x.id) === Number(id));
-  if (!p) return;
-  const item = cart.find(x => Number(x.id) === Number(id));
-  if (item) item.qty += 1;
-  else cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
-  saveCart();
-  openCart();
+function addToCart(id){
+  const p=products.find(x=>Number(x.id)===Number(id)); if(!p) return;
+  const item=cart.find(x=>Number(x.id)===Number(id));
+  if(item) item.qty+=1; else cart.push({id:p.id,name:p.name,price:p.price,qty:1});
+  saveCart(); openCart();
 }
-
-function saveCart() {
-  localStorage.setItem('cart_5gshop', JSON.stringify(cart));
-  updateCartUI();
-}
-
-function updateCartUI() {
-  count.textContent = cart.reduce((a, x) => a + x.qty, 0);
-  const t = cart.reduce((a, x) => a + x.price * x.qty, 0);
-  total.textContent = t.toLocaleString();
-  cartList.innerHTML = cart.map(x => `
+function saveCart(){localStorage.setItem('cart_5gshop',JSON.stringify(cart));updateCartUI()}
+function updateCartUI(){
+  count.textContent=cart.reduce((a,x)=>a+x.qty,0);
+  const t=cart.reduce((a,x)=>a+x.price*x.qty,0); total.textContent=t.toLocaleString();
+  cartList.innerHTML=cart.map(x=>`
     <div class="cart-item">
-      <div>
-        <b>${esc(x.name)}</b>
-        <small>Rs. ${Number(x.price).toLocaleString()} × ${x.qty}</small>
+      <div><b>${esc(x.name)}</b><br><small>Rs. ${Number(x.price).toLocaleString()} × ${x.qty}</small></div>
+      <div class="qty"><button onclick="chg(${Number(x.id)},-1)">−</button><button onclick="chg(${Number(x.id)},1)">+</button></div>
+    </div>`).join('')||'<div class="empty">Your cart is empty.</div>';
+  updateWaLinks();
+}
+function chg(id,n){const x=cart.find(i=>Number(i.id)===Number(id)); if(!x)return; x.qty+=n; if(x.qty<1) cart=cart.filter(i=>Number(i.id)!==Number(id)); saveCart()}
+function openCart(){drawer.classList.add('open');updateCartUI()}
+function closeCart(){drawer.classList.remove('open')}
+
+function toggleWish(id){
+  const p=products.find(x=>Number(x.id)===Number(id)); if(!p) return;
+  if(isWished(id)) wish=wish.filter(x=>Number(x.id)!==Number(id));
+  else wish.push({id:p.id,name:p.name,price:p.price,image:p.image||'',category:p.category||''});
+  localStorage.setItem('wish_5gshop',JSON.stringify(wish)); updateWishUI(); render();
+}
+function updateWishUI(){
+  wishCount.textContent=wish.length;
+  wishList.innerHTML=wish.map(x=>`
+    <div class="cart-item">
+      <div><b>${esc(x.name)}</b><br><small>Rs. ${Number(x.price).toLocaleString()}</small></div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-dark" onclick="addToCart(${Number(x.id)})">Add</button>
+        <button class="btn btn-soft" onclick="toggleWish(${Number(x.id)});updateWishUI()">Remove</button>
       </div>
-      <div class="qty">
-        <button onclick="chg(${Number(x.id)},-1)">−</button>
-        <button onclick="chg(${Number(x.id)},1)">+</button>
-      </div>
-    </div>`).join('') || '<div class="empty">Your cart is empty.</div>';
-  updateWa();
+    </div>`).join('')||'<div class="empty">Wishlist is empty.</div>';
 }
+function openWish(){wishDrawer.classList.add('open');updateWishUI()}
+function closeWish(){wishDrawer.classList.remove('open')}
 
-function chg(id, n) {
-  const x = cart.find(i => Number(i.id) === Number(id));
-  if (!x) return;
-  x.qty += n;
-  if (x.qty < 1) cart = cart.filter(i => Number(i.id) !== Number(id));
-  saveCart();
+function updateWaLinks(){
+  const num=(settings.whatsapp||'923001234567').replace(/[^0-9]/g,'');
+  const t=cart.reduce((a,x)=>a+x.price*x.qty,0);
+  const lines=cart.map(x=>`• ${x.name} x${x.qty} = Rs.${x.price*x.qty}`).join('%0A');
+  const msg=`Order from 5Gshop.pk%0A%0A${lines||'No items yet'}%0A%0ATotal: Rs.${t}%0A%0AName: ${encodeURIComponent(name.value||'')}%0APhone: ${encodeURIComponent(phone.value||'')}%0ACity: ${encodeURIComponent(city.value||'')}%0AAddress: ${encodeURIComponent(address.value||'')}%0ANote: ${encodeURIComponent(note.value||'')}`;
+  waBtn.href=`https://wa.me/${num}?text=${msg}`;
+  waFloat.href=`https://wa.me/${num}?text=${encodeURIComponent('Hi 5Gshop.pk, I want to order mobile accessories.')}`;
+  footWa.textContent='WhatsApp: +'+num;
 }
+['name','phone','city','address','note'].forEach(id=>document.getElementById(id).addEventListener('input',updateWaLinks));
 
-function openCart() { drawer.classList.add('open'); updateCartUI(); }
-function closeCart() { drawer.classList.remove('open'); }
-
-function updateWa() {
-  const t = cart.reduce((a, x) => a + x.price * x.qty, 0);
-  const lines = cart.map(x => `• ${x.name} x${x.qty} = Rs.${x.price * x.qty}`).join('%0A');
-  const msg = `Order from 5Gshop.pk%0A%0A${lines}%0A%0ATotal: Rs.${t}%0A%0AName: ${encodeURIComponent(name.value||'')}%0APhone: ${encodeURIComponent(phone.value||'')}%0ACity: ${encodeURIComponent(city.value||'')}%0AAddress: ${encodeURIComponent(address.value||'')}`;
-  const num = (settings.whatsapp || '923001234567').replace(/[^0-9]/g, '');
-  waBtn.href = `https://wa.me/${num}?text=${msg}`;
-}
-
-['name','phone','city','address'].forEach(id => {
-  document.getElementById(id).addEventListener('input', updateWa);
-});
-
-async function placeOrder() {
-  if (!cart.length) return alert('Cart is empty');
-  if (!name.value.trim() || !phone.value.trim() || !address.value.trim()) return alert('Please fill name, phone and address');
-  const payload = {
-    customer_name: name.value.trim(),
-    phone: phone.value.trim(),
-    city: city.value.trim(),
-    address: address.value.trim(),
-    items: cart,
-    total: cart.reduce((a, x) => a + x.price * x.qty, 0)
-  };
-  try {
-    const r = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.error || 'Order failed');
-    cart = [];
-    saveCart();
-    closeCart();
-    alert('Order placed successfully! We will contact you soon.');
-  } catch (e) {
-    updateWa();
-    waBtn.click();
-  }
+async function placeOrder(){
+  if(!cart.length) return alert('Cart is empty');
+  if(!name.value.trim()||!phone.value.trim()||!address.value.trim()) return alert('Please fill name, phone and address');
+  const payload={customer_name:name.value.trim(),phone:phone.value.trim(),city:city.value.trim(),address:address.value.trim()+(note.value?(' | Note: '+note.value.trim()):''),items:cart,total:cart.reduce((a,x)=>a+x.price*x.qty,0)};
+  try{
+    const r=await fetch('/api/orders',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json(); if(!r.ok) throw new Error(d.error||'Order failed');
+    cart=[]; saveCart(); closeCart(); alert('Order placed successfully!');
+  }catch(e){updateWaLinks(); waBtn.click()}
 }
 
 load();
