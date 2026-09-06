@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5GShop.pk Admin</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,Arial,sans-serif;background:#f4f4f4;color:#111}
+.login-wrap{min-height:100vh;display:grid;place-items:center;background:#111}
+.box{background:#fff;padding:24px;border-radius:14px;width:min(360px,92%)}
+input,button,select,textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ddd;border-radius:8px;font-size:14px}
+button{background:#111;color:#fff;border:0;cursor:pointer;font-weight:700}
+#app{display:none}
+.nav{display:flex;gap:6px;overflow:auto;background:#111;padding:10px}
+.nav button{width:auto;white-space:nowrap;background:#222}
+.nav button.on{background:#fff;color:#111}
+.main{padding:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.card{background:#fff;padding:16px;border-radius:12px}
+.card b{display:block;font-size:22px;margin-top:6px}
+.panel{background:#fff;padding:16px;border-radius:12px;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:10px 6px;border-bottom:1px solid #eee;text-align:left}
+.err{color:#c00;min-height:18px}
+.row-btns{display:flex;gap:6px}
+.row-btns button{width:auto;padding:8px 10px}
+</style>
+</head>
+<body>
+<div id="login" class="login-wrap">
+  <div class="box">
+    <h1 style="margin:0 0 6px">5GShop.pk</h1>
+    <h3 style="margin:0 0 12px;font-weight:600">Admin Login</h3>
+    <input id="user" value="admin" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button id="loginBtn">Sign In</button>
+    <p class="err" id="err"></p>
+    <small>Default: admin / admin123</small>
+  </div>
+</div>
+
+<div id="app">
+  <div class="nav">
+    <button class="on" data-tab="dash">Dashboard</button>
+    <button data-tab="products">Products</button>
+    <button data-tab="orders">Orders</button>
+    <button data-tab="settings">Settings</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+  <main class="main">
+    <section id="dash" class="panel">
+      <h2>Dashboard</h2>
+      <div class="cards">
+        <div class="card">Sales<b id="sSales">Rs. 0</b></div>
+        <div class="card">Orders<b id="sOrders">0</b></div>
+        <div class="card">Products<b id="sProducts">0</b></div>
+      </div>
+    </section>
+
+    <section id="products" class="panel" style="display:none">
+      <h2>Products</h2>
+      <input id="pName" placeholder="Product name">
+      <input id="pPrice" type="number" placeholder="Price (PKR)">
+      <input id="pCompare" type="number" placeholder="Compare price (optional)">
+      <input id="pCategory" placeholder="Category (e.g. Chargers)">
+      <input id="pImage" placeholder="Image URL (optional)">
+      <input id="pStock" type="number" placeholder="Stock" value="10">
+      <button id="addProductBtn">Add Product</button>
+      <div id="productTable" style="margin-top:14px;overflow:auto"></div>
+    </section>
+
+    <section id="orders" class="panel" style="display:none">
+      <h2>Orders</h2>
+      <div id="orderTable" style="overflow:auto"></div>
+    </section>
+
+    <section id="settings" class="panel" style="display:none">
+      <h2>Settings</h2>
+      <input id="whatsapp" placeholder="WhatsApp number with country code (e.g. 923001234567)">
+      <input id="storeName" placeholder="Store name">
+      <button id="saveSettingsBtn">Save Settings</button>
+    </section>
+  </main>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+async function api(path, opts = {}) {
+  const r = await fetch(path, {
+    ...opts,
+    headers: { 'content-type': 'application/json', ...(opts.headers || {}) }
+  });
+  let d = {};
+  try { d = await r.json(); } catch (e) {}
+  if (!r.ok) throw new Error(d.error || 'Request failed');
+  return d;
+}
+
+function showTab(name) {
+  ['dash','products','orders','settings'].forEach(id => {
+    $(id).style.display = id === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav button[data-tab]').forEach(b => {
+    b.classList.toggle('on', b.dataset.tab === name);
+  });
+  if (name === 'dash') loadDash();
+  if (name === 'products') loadProducts();
+  if (name === 'orders') loadOrders();
+  if (name === 'settings') loadSettings();
+}
+
+document.querySelectorAll('.nav button[data-tab]').forEach(b => {
+  b.onclick = () => showTab(b.dataset.tab);
+});
+
+async function boot() {
+  try {
+    const me = await api('/api/admin/me');
+    if (me.loggedIn) {
+      $('login').style.display = 'none';
+      $('app').style.display = 'block';
+      showTab('dash');
+      return;
+    }
+  } catch (e) {}
+  $('login').style.display = 'grid';
+  $('app').style.display = 'none';
+}
+
+$('loginBtn').onclick = async () => {
+  try {
+    await api('/api/admin/login', {
+      method: 'POST',
+      body: JSON.stringify({ username: $('user').value.trim(), password: $('pass').value })
+    });
+    location.reload();
+  } catch (e) {
+    $('err').textContent = e.message;
+  }
+};
+
+$('logoutBtn').onclick = async () => {
+  await api('/api/admin/logout', { method: 'POST' });
+  location.reload();
+};
+
+async function loadDash() {
+  const d = await api('/api/admin/dashboard');
+  $('sSales').textContent = 'Rs. ' + Number(d.sales || 0).toLocaleString();
+  $('sOrders').textContent = d.orders || 0;
+  $('sProducts').textContent = d.products || 0;
+}
+
+async function loadProducts() {
+  const d = await api('/api/admin/products');
+  const rows = (d.products || []).map(p => `
+    <tr>
+      <td>${escapeHtml(p.name)}</td>
+      <td>Rs. ${Number(p.price).toLocaleString()}</td>
+      <td>${escapeHtml(p.category || '')}</td>
+      <td>${p.stock}</td>
+      <td><button onclick="delProduct(${p.id})">Delete</button></td>
+    </tr>`).join('');
+  $('productTable').innerHTML = `<table><tr><th>Name</th><th>Price</th><th>Category</th><th>Stock</th><th></th></tr>${rows || '<tr><td colspan="5">No products yet</td></tr>'}</table>`;
+}
+
+$('addProductBtn').onclick = async () => {
+  const body = {
+    name: $('pName').value.trim(),
+    price: Number($('pPrice').value || 0),
+    compare_price: Number($('pCompare').value || 0),
+    category: $('pCategory').value.trim(),
+    image: $('pImage').value.trim(),
+    stock: Number($('pStock').value || 0),
+    active: 1
+  };
+  if (!body.name || !body.price) return alert('Name and price required');
+  await api('/api/admin/products', { method: 'POST', body: JSON.stringify(body) });
+  $('pName').value = '';
+  $('pPrice').value = '';
+  $('pCompare').value = '';
+  $('pImage').value = '';
+  loadProducts();
+  loadDash();
+};
+
+async function delProduct(id) {
+  if (!confirm('Delete this product?')) return;
+  await api('/api/admin/products', { method: 'DELETE', body: JSON.stringify({ id }) });
+  loadProducts();
+  loadDash();
+}
+
+async function loadOrders() {
+  const d = await api('/api/admin/orders');
+  const rows = (d.orders || []).map(o => `
+    <tr>
+      <td>#${o.id}</td>
+      <td>${escapeHtml(o.customer_name)}<br><small>${escapeHtml(o.phone || '')}</small></td>
+      <td>Rs. ${Number(o.total || 0).toLocaleString()}</td>
+      <td>${escapeHtml(o.status || 'pending')}</td>
+      <td><small>${escapeHtml(o.city || '')}<br>${escapeHtml(o.address || '')}</small></td>
+    </tr>`).join('');
+  $('orderTable').innerHTML = `<table><tr><th>ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Address</th></tr>${rows || '<tr><td colspan="5">No orders yet</td></tr>'}</table>`;
+}
+
+async function loadSettings() {
+  const d = await api('/api/admin/settings');
+  const s = d.settings || {};
+  $('whatsapp').value = s.whatsapp || '';
+  $('storeName').value = s.store_name || '5GShop.pk';
+}
+
+$('saveSettingsBtn').onclick = async () => {
+  await api('/api/admin/settings', {
+    method: 'PUT',
+    body: JSON.stringify({
+      whatsapp: $('whatsapp').value.trim(),
+      store_name: $('storeName').value.trim() || '5GShop.pk'
+    })
+  });
+  alert('Settings saved');
+};
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+boot();
+</script>
+</body>
+</html>
