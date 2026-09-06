@@ -3,31 +3,21 @@
 Online shop for mobile accessories & gadgets in Pakistan.
 
 **Stack**
-- Frontend: static HTML/CSS/JS
-- Backend: Cloudflare Worker
-- Database: **Cloudflare D1** (all products, orders, settings, admins)
-- Deploy: GitHub connected to Cloudflare (**auto deploy** on every push)
+- Cloudflare Worker + Assets
+- Cloudflare D1 database
+- GitHub auto deploy
 
-**Features**
-- Product catalog
-- Shopping cart
-- Cash on Delivery (COD)
-- WhatsApp order button
-- Admin panel
+## Public store
+- `/` storefront
 
-## Cloudflare setup (one time)
+## Private admin
+Public `/admin` is blocked (404).
 
-1. Workers & Pages → create project from this GitHub repo
-2. Create D1 database named `5gshop-db`
-3. Bind D1 to the Worker as **`DB`**
-4. Enable auto deploy from GitHub `main` branch
+Private control panel path:
+`/cp-5g-x7k9m2`
 
-## Admin
-
-- URL: `/admin`
+Login:
 - Username: `admin`
 - Password: `admin123`
 
-Change password and WhatsApp number in Admin → Settings after first login.
-
-All data is stored in **Cloudflare D1** only.
+Keep this path private. Do not share on the website.

@@ -38,6 +38,9 @@ function parseCookie(req, name) {
   return '';
 }
 
+// Private control panel path (not linked on public site)
+const PRIVATE_ADMIN_PATH = '/cp-5g-x7k9m2';
+
 async function ensureDb(db) {
   await db.batch([
     db.prepare('CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)'),
@@ -228,12 +231,30 @@ export default {
         return await handleApi(req, env, url);
       }
 
-      if (url.pathname === '/admin' || url.pathname === '/admin/' || url.pathname === '/admin.html') {
-        const asset = await env.ASSETS.fetch(new Request(new URL('/admin.html', url.origin)));
+      // Block public admin URLs (like private platform admin)
+      if (
+        url.pathname === '/admin' ||
+        url.pathname === '/admin/' ||
+        url.pathname === '/admin.html' ||
+        url.pathname === '/login' ||
+        url.pathname === '/dashboard'
+      ) {
+        return new Response('Not Found', { status: 404 });
+      }
+
+      // Private control panel only
+      if (url.pathname === PRIVATE_ADMIN_PATH || url.pathname === PRIVATE_ADMIN_PATH + '/') {
+        const asset = await env.ASSETS.fetch(new Request(new URL('/cp-panel.html', url.origin)));
+        if (!asset.ok) return new Response('Not Found', { status: 404 });
         return new Response(await asset.text(), {
           status: 200,
           headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' }
         });
+      }
+
+      // Do not expose panel file directly
+      if (url.pathname === '/cp-panel.html' || url.pathname === '/admin.html') {
+        return new Response('Not Found', { status: 404 });
       }
 
       var path = url.pathname;
